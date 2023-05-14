@@ -1,6 +1,5 @@
 <script>
 	export let data;
-	console.log('data in posts', data);
 </script>
 
 <svelte:head>
@@ -12,16 +11,26 @@
 <article>
 	<h2 style="color: var(--brand)">{data.meta.title}</h2>
 
-	<div class="tags">
+	<!-- <div class="tags flex justify-center gap-4">
 		{#each data.meta.categories as category}
-			<span class="surface-4">&num;{category}</span>
+			<span class="surface-4 p-2 rounded-md">&num;{category}</span>
 		{/each}
-	</div>
+	</div> -->
 
-	<div class="prose">
+	<div class="post">
 		<svelte:component this={data.content} />
 	</div>
 </article>
 
 <style>
+	article {
+		min-height: 100vh;
+		height: 100vh;
+		padding: 4rem;
+	}
+
+	h2 {
+		font-size: 2rem;
+		text-align: center;
+	}
 </style>

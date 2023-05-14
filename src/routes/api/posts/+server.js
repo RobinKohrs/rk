@@ -4,10 +4,11 @@ async function getPosts() {
 	let posts = [];
 
 	const paths = import.meta.glob('/src/posts/*.md', { eager: true });
+	console.log('paths: ', paths);
 
 	for (const path in paths) {
 		const file = paths[path];
-		const slug = path.split('/').at(-1)?.replace('.md', '');
+		let slug = path.split('/').at(-1)?.replace('.md', '');
 
 		if (file && typeof file === 'object' && 'metadata' in file && slug) {
 			const metadata = file.metadata;
@@ -19,7 +20,6 @@ async function getPosts() {
 	posts = posts.sort(
 		(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
 	);
-
 	return posts;
 }
 

@@ -25,6 +25,14 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"mapbox-gl": "^2.12.0"
+		"@fontsource/jetbrains-mono": "^4.5.12",
+		"@fontsource/manrope": "^4.5.13",
+		"@mapbox/leaflet-pip": "^1.1.0",
+		"d3": "^7.8.4",
+		"leaflet": "^1.9.3",
+		"mapbox-gl": "^2.12.0",
+		"rehype-slug": "^5.1.0",
+		"remark-toc": "^8.0.1",
+		"remark-unwrap-images": "^3.0.1"
 	}
 }

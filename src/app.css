@@ -1,8 +1,17 @@
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
+
+@import '@fontsource/jetbrains-mono';
+@import '@fontsource/manrope';
 
 html {
+	/* font */
+	--font-sans: 'Manrope', sans-serif;
+	--font-mono: 'JetBrains Mono', monospace;
+
+	font-family: var(--font-sans);
+
 	/* dark */
 	--brand-dark: var(--orange-3);
 	--text-1-dark: var(--gray-3);
@@ -24,7 +33,7 @@ html {
 	--surface-2-light: var(--gray-1);
 	--surface-3-light: var(--gray-2);
 	--surface-4-light: var(--gray-3);
-	--background-light: none;
+	--background-light: var(--surface-2-light);
 	--border-light: var(--gray-4);
 	--linkColor-light: #e599f7;
 }
@@ -107,4 +116,9 @@ html {
 
 img {
 	border-radius: var(--radius-3);
+}
+
+.surface-4 {
+	color: var(--brand);
+	background-color: var(--surface-3);
 }

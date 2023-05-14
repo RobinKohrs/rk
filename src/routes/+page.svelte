@@ -1,15 +1,15 @@
 <script>
 	import { landing_page_folders, title } from '$lib/config';
+	import LandingPage from '../lib/landingPage.svelte';
 </script>
 
-<h2>{title}</h2>
-{#each landing_page_folders as { name, slug }, i}
-	<a href={`${slug}`}>
-		<button class="folder">
-			{name}
-		</button>
-	</a>
-{/each}
+<LandingPage
+	title={'Robin Kohrs'}
+	items={landing_page_folders}
+	item_path_accessor="slug"
+	item_title_accessor="name"
+	route_folder={landing_page_folders.map((e) => e.slug)}
+/>
 
 <footer>&copy; RCE</footer>
 
@@ -18,6 +18,7 @@
 		color: var(--brand);
 		margin-block: 2rem;
 		text-align: center;
+		margin-inline: auto;
 	}
 
 	.folder {
