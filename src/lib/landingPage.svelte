@@ -15,7 +15,6 @@
 
 {#each items as item, i}
 	{@const href = `${route_folder.length === 1 ? route_folder[0] : route_folder[i]}`}
-	{console.log('hr: ', href) || ''}
 	<a {href}>
 		<button
 			class="folder"
