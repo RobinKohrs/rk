@@ -21,23 +21,33 @@
 		return slides;
 	}
 
-	let currentSlide = 0;
 	$: if (browser) {
 		currentSlide = Object.fromEntries($page.url.searchParams).slide ?? 0;
 	}
 
 	let container;
-	$: if (currentSlide !== 0 && container && browser) {
+	let currentSlide = 0;
+	let slides_fetched = false;
+	let slides_promise = get_slides().then((s) => {
+		slides_fetched = true;
+		return s;
+	});
+
+	$: if (currentSlide !== 0 && container && browser && slides_fetched) {
 		document.getElementById(`slide-${currentSlide}`).scrollIntoView({ behavior: 'smooth' });
+		// console.log(document.getElementById(`slide-${currentSlide}`));
 	}
 </script>
 
-{#await get_slides()}
+{#await slides_promise}
 	waiting
 {:then slides}
-	<div class="container">
-		{#each slides as slide}
-			<div class="slide">
+	<div class="container" bind:this={container}>
+		<div class="input z-10 bg-slate-400 fixed top-0 h-12">
+			<button on:click={() => (currentSlide = slides.length - 1)}>Go to last slide</button>
+		</div>
+		{#each slides as slide, i}
+			<div id={`slide-${i}`} class="slide grid place-items-center">
 				<svelte:component this={slide} />
 			</div>
 		{/each}
