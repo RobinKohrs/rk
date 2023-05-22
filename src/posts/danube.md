@@ -20,23 +20,35 @@ let data_paths = [
 ]
 </script>
 
-### Problem:
+People who do not live close to the ocean face <strong>tough times</strong>. They say life is just better at the beach. Unfortunately Vienna is a little far from the Ocean.
 
-People who do not live close to the ocean face <strong>tough decisions</strong>. Either move to the ocean or enjoy the city while always claiming that <strong>life at the ocean is simply better</strong> but not having the courage of actually changing things.
-
-> Map of distance to Portugal
+<img src="/images/posts/danube/viennaSagres.png"   loading="lazy">
 
 At least in Vienna there is water. The river that runs through the city is called <strong>Donau or Danube</strong>.
 
-> map of donau
+<img src="/images/posts/danube/danube.png"   loading="lazy">
 
-<img src="/images/posts/thin_lines.png"  srcset="/images/posts/thin_lines.png 900w, /images/posts/thin_lines_600.png 600w" loading="lazy">
+So the most important aspect when living in Vienna is to live close to the river. Or at least somwhere, where public transport brings you quickly there. I figured there are three main stations right next to the Donau. <strong>U1 Neue Donau</strong>, <strong>U1 Donauinsel</strong> and <strong>U2 Donaustradtbrücke</strong>
+
+So I took 1000 Points and the HERE-Public tansport API to simluate how long it takes me to get to each of them if I leave my house on the 27th of May in 2023 at 12 (noon). These are the points and you can see the three stations.
+
+<img src="/images/posts/danube/thin_lines.png"  srcset="/images/posts/danube/thin_lines.png 900w, /images/posts/danube/thin_lines_600.png 600w" loading="lazy">
+
+This probably does not make any sense, but here you go!
 
 <div class="item">
 <MapLeaflet data_paths={data_paths} />
 </div>
 
+<div style="text-align: center">
+  Very important thread here!
+</div>
+<img src="/images/posts/danube/rainbow_vienna.png"   loading="lazy">
+
 <style>
+  img {
+    margin-block: 2rem;
+  }
   .item {
     padding-block: 2rem;
   }

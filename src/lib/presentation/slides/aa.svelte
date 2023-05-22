@@ -1,5 +1,5 @@
 <script>
-	let slide = 'aa';
+	let slide = 'Second slide';
 </script>
 
 {slide}

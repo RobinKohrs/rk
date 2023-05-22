@@ -1,5 +1,5 @@
 <script>
-	let slide = 'a';
+	let slide = 'This is (not yet) work in Progress';
 </script>
 
 {slide}

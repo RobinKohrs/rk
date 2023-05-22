@@ -27,13 +27,14 @@
 
 	let container;
 	let currentSlide = 0;
+	$: console.log('currentSlide', currentSlide);
 	let slides_fetched = false;
 	let slides_promise = get_slides().then((s) => {
 		slides_fetched = true;
 		return s;
 	});
 
-	$: if (currentSlide !== 0 && container && browser && slides_fetched) {
+	$: if (container && browser && slides_fetched) {
 		document.getElementById(`slide-${currentSlide}`).scrollIntoView({ behavior: 'smooth' });
 		// console.log(document.getElementById(`slide-${currentSlide}`));
 	}
@@ -43,8 +44,15 @@
 	waiting
 {:then slides}
 	<div class="container" bind:this={container}>
-		<div class="input z-10 bg-slate-400 fixed top-0 h-12">
-			<button on:click={() => (currentSlide = slides.length - 1)}>Go to last slide</button>
+		<div class="input z-10 bg-slate-400 fixed top-12 left-1/2" style="transform: translate(-50%);">
+			<button
+				class="p-8"
+				on:click={() =>
+					currentSlide === slides.length - 1
+						? (currentSlide = 0)
+						: (currentSlide = slides.length - 1)}
+				>Go to {currentSlide === slides.length - 1 ? 'first' : 'last'} slide</button
+			>
 		</div>
 		{#each slides as slide, i}
 			<div id={`slide-${i}`} class="slide grid place-items-center">

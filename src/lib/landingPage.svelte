@@ -1,4 +1,15 @@
 <script>
+	import { cartoColors } from '$lib/config';
+	import { browser } from '$app/environment';
+
+	let palette;
+	if (browser) {
+		palette = cartoColors.Temps['7'];
+		// let {
+		// 	Temps: { '7': palette }
+		// } = cartoColors;
+	}
+
 	export let title;
 	export let description;
 	export let items;
@@ -13,20 +24,25 @@
 
 <h2 class="text-[2rem]">{title}</h2>
 
-{#each items as item, i}
-	{@const href = `${route_folder.length === 1 ? route_folder[0] : route_folder[i]}`}
-	<a {href}>
-		<button
-			class="folder"
-			style:background-image={`url(${item[item_photo_path_accessor]})`}
-			style:background-position={item[background_image_position_accessor]}
-		>
-			<span class="title p-2 rounded-md font-bold">
-				{item[item_title_accessor]}
-			</span>
-		</button>
-	</a>
-{/each}
+{#if palette}
+	{#each items as item, i}
+		{@const href = `${route_folder.length === 1 ? route_folder[0] : route_folder[i]}`}
+		{@const bgImage = item[item_photo_path_accessor]}
+		<a {href}>
+			<button
+				class="folder"
+				style:background={palette[
+					(i * Math.floor(Math.random() * palette.length)) % palette.length
+				]}
+				style:background-position={item[background_image_position_accessor]}
+			>
+				<span class="title p-2 rounded-md font-bold">
+					{item[item_title_accessor]}
+				</span>
+			</button>
+		</a>
+	{/each}
+{/if}
 
 <style lang="scss">
 	h2 {
