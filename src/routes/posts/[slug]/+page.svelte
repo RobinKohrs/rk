@@ -26,7 +26,6 @@
 	article {
 		min-height: 100vh;
 		height: 100vh;
-		padding: 4rem;
 	}
 
 	h2 {
