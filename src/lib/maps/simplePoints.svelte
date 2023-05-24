@@ -3,7 +3,7 @@
 	import { browser, building, dev, version } from '$app/environment';
 
 	// d3
-	import { scaleLinear } from 'd3-scale';
+	import { scaleLinear } from 'd3';
 	import { extent } from 'd3';
 	const d3 = { scaleLinear, extent };
 
