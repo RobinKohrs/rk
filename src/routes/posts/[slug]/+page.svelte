@@ -8,7 +8,7 @@
 	<meta property="og:title" content={data.meta.title} />
 </svelte:head>
 
-<article>
+<article class="">
 	<h2 style="color: var(--brand)">{data.meta.title}</h2>
 
 	<!-- <div class="tags flex justify-center gap-4">
@@ -17,7 +17,7 @@
 		{/each}
 	</div> -->
 
-	<div class="post">
+	<div class="post relative">
 		<svelte:component this={data.content} />
 	</div>
 </article>
@@ -26,6 +26,10 @@
 	article {
 		min-height: 100vh;
 		height: 100vh;
+		display: grid;
+		grid-template-rows: 100px 1fr;
+		align-items: center;
+		widows: 100%;
 	}
 
 	h2 {

@@ -16,6 +16,6 @@
 		position: relative;
 		max-width: min(100%, 900px);
 		margin-inline: auto;
-		padding-inline: 1rem;
+		// padding-inline: 1rem;
 	}
 </style>
