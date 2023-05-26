@@ -128,7 +128,7 @@
 
 	let clickedCoordinates;
 	let clickedInMap = false;
-	$: if (map && leafletPip) {
+	$: if (map) {
 		map.on('click', (e) => {
 			let { lat, lng } = e.latlng;
 			clickedCoordinates = [lng, lat];
@@ -159,7 +159,16 @@
 		</div>
 	{/if}
 
-	<div id="map" />
+	<div id="map" class="relative z-0">
+		{#if clickedCoordinates}
+			<div
+				class="map-tooltip absolute bg-white p-2 rounded-md shadow-md"
+				style="left: 0; right: 0; top: 0; height: 2rem; z-index: 1000;"
+			>
+				hi
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style>

@@ -34,13 +34,26 @@
 			currentImage = Math.floor(scrollPos / imgWidth);
 		});
 	}
+
+	function handleClick(direction, i) {
+		const imgWidth = slider.clientWidth - 10;
+		if (direction === 'left') {
+			slider.scrollLeft = imgWidth * (i - 1);
+		} else {
+			slider.scrollLeft = imgWidth * (i + 1);
+		}
+	}
 </script>
 
-<div class="slider-outer-container relative w-full flex items-center">
+<div class="slider-outer-container fixed inset-0 w-full flex justify-center items-center">
 	<div class="slider-wrapper">
 		<div class="slider" bind:this={slider}>
 			{#each images as image, i}
-				<img id={`slide-${i}`} src={image.path} alt={image.label} />
+				<div class="relative">
+					<img id={`slide-${i}`} src={image.path} alt={image.label} />
+					<div on:click={() => handleClick('left', i)} class="arrow left">&larr;</div>
+					<div on:click={() => handleClick('right', i)} class="arrow right">&rarr;</div>
+				</div>
 			{/each}
 		</div>
 		<div class="slider-nav">
@@ -75,23 +88,66 @@
 
 	.slider-wrapper {
 		position: relative;
-		max-width: 48rem;
+		max-width: min(900px, 90vw);
 		margin: auto;
+		overflow-x: hidden;
+		border-radius: 1rem;
 	}
 	.slider {
 		display: flex;
 		aspect-ratio: 16/9;
-		overflow-x: auto;
+		overflow-x: scroll;
 		scroll-snap-type: x mandatory;
 		scroll-behavior: smooth;
 		box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
-		border-radius: 0.25rem;
 	}
 
-	.slider img {
+	@media screen and (max-width: 900px) {
+		.slider {
+			aspect-ratio: 1;
+		}
+	}
+
+	.slider > * {
 		flex: 1 0 100%;
 		object-fit: cover;
 		scroll-snap-align: start;
+	}
+
+	.arrow {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 20%;
+		color: white;
+		opacity: 0;
+		background-color: hsla(0, 0%, 0%, 0.5);
+		transition: opacity 0.1s linear;
+		display: grid;
+		place-items: center;
+		font-size: 2rem;
+	}
+
+	.arrow:hover {
+		opacity: 1;
+		cursor: pointer;
+	}
+
+	.arrow.left {
+		left: 0;
+	}
+	.arrow.right {
+		right: 0;
+	}
+
+	img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+
+	.slider img:hover {
+		cursor: pointer;
 	}
 
 	.slider-nav {

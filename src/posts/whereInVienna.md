@@ -1,5 +1,5 @@
 ---
-title: Where in Vienna?
+title: Fahrradpumpen in Wien!
 description: another description
 date: '2023-5-21'
 categories:
@@ -28,4 +28,7 @@ let data_paths = [
 
 </script>
 
+<h1 style="text-align: center; font-size: 3rem;">
+Because I need it wayyy to often...
+</h1>
 <SimplePoints {data_paths} selected={"Fahrradpumpen"} />

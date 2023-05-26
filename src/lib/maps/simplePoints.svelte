@@ -58,7 +58,6 @@
 		// 	style: { color: '#ff7800', weight: 20, radius: 20, opacity: 1 },
 		// 	onEachFeature: (f, layer) => createTooltip(f, layer)
 		// });
-		console.log('pointToLayer', L.pointToLayer);
 		currentLayer = L.geoJSON(data[selected], {
 			pointToLayer: function (feature, latlng) {
 				return new L.CircleMarker(latlng, {
@@ -97,7 +96,7 @@
 
 	let clickedCoordinates;
 	let clickedInMap = false;
-	$: if (map && leafletPip) {
+	$: if (map) {
 		map.on('click', (e) => {
 			let { lat, lng } = e.latlng;
 			clickedCoordinates = [lng, lat];

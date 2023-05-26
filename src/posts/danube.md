@@ -1,5 +1,5 @@
 ---
-title: How long to Donau?!
+title: How long do I need to the Donau?!
 description: this is the description.
 date: '2023-5-07'
 categories:
@@ -20,7 +20,7 @@ let data_paths = [
 ]
 </script>
 
-People who do not live close to the ocean face <strong>tough times</strong>. They say life is just better at the beach. Unfortunately Vienna is a little far from the Ocean.
+People who do not live close to rivers, lakes or oceans face <strong>tough times</strong>.
 
 <img src="/images/posts/danube/viennaSagres.png"   loading="lazy">
 
