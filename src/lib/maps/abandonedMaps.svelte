@@ -5,6 +5,14 @@
 			label: 'The nothern side of the city of Bolzano'
 		},
 		{
+			path: '/images/random/carpathian.webp',
+			label: 'The carpahtian mountains in 2.5d'
+		},
+		{
+			path: '/images/random/rio_de_janeiro.png',
+			label: 'View over Rio de Janeiro'
+		},
+		{
 			path: '/images/random/cafécount.png',
 			label: 'A count of the coffees in Italy'
 		},

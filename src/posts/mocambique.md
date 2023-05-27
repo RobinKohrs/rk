@@ -10,14 +10,14 @@ published: true
 bg_position: 50% 50%
 ---
 
-Evetually there will be a presentation about the mozambique
+<div class="container fixed inset-0 grid place-items-center  mx-auto">
+    <div>
+    <div>
+    Evetually there will be a presentation about mozambique
+    </div>
+    <a style="display: block; text-align: center;" href="/presentation"> Comeca a apresentacao </a>
+    </div>
 
-<script>
-    // import Mocambique from "$lib/presentation/mocambique.svelte"
-</script>
-
-<div class="container fixed inset-0 grid place-items-center mx-auto">
-    <a href="/presentation"> Comeca a apresentacao </a>
 </div>
 
 <style>
@@ -26,5 +26,9 @@ Evetually there will be a presentation about the mozambique
         padding: 2rem;
         border-radius: 1rem;
         background-color: lightblue;
+    }
+
+    a:hover{
+        outline: 2px solid darkblue;
     }
     </style>

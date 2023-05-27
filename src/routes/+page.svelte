@@ -3,6 +3,8 @@
 	import LandingPage from '../lib/landingPage.svelte';
 </script>
 
+<div class="background-starter fixed inset-0" />
+
 <LandingPage
 	title={'Robin Kohrs'}
 	items={landing_page_folders}
@@ -14,6 +16,12 @@
 <footer>&copy; RCE</footer>
 
 <style lang="scss">
+	.background-starter {
+		z-index: -1;
+		background-image: url(images/random/carpathian.webp);
+		background-size: cover;
+	}
+
 	h2 {
 		color: var(--brand);
 		margin-block: 2rem;
