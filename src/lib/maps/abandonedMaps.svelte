@@ -58,7 +58,7 @@
 		<div class="slider" bind:this={slider}>
 			{#each images as image, i}
 				<div class="relative">
-					<img id={`slide-${i}`} src={image.path} alt={image.label} />
+					<img loading="lazy" id={`slide-${i}`} src={image.path} alt={image.label} />
 					<div on:click={() => handleClick('left', i)} class="arrow left">&larr;</div>
 					<div on:click={() => handleClick('right', i)} class="arrow right">&rarr;</div>
 				</div>
