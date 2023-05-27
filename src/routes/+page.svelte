@@ -18,7 +18,7 @@
 <style lang="scss">
 	.background-starter {
 		z-index: -1;
-		background-image: url(images/random/carpathian.webp);
+		background-image: url(/images/random/carpathian.webp);
 		background-size: cover;
 	}
 
