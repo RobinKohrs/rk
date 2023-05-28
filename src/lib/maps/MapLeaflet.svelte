@@ -139,7 +139,16 @@
 	}
 
 	let tooltip;
-	function handleFeatureClick() {}
+	function handleFeatureClick(f, e) {
+		tooltip = f;
+	}
+
+	// shitty solution
+	function closeModal() {
+		setTimeout(() => {
+			clickedCoordinates = undefined;
+		}, 100);
+	}
 </script>
 
 <svelte:head>
@@ -160,14 +169,22 @@
 	{/if}
 
 	<div id="map" class="relative z-0">
-		{#if clickedCoordinates}
-			<div
-				class="map-tooltip absolute bg-white p-2 rounded-md shadow-md"
-				style="left: 0; right: 0; top: 0; height: 2rem; z-index: 1000;"
-			>
-				hi
-			</div>
-		{/if}
+		<div class="map-controls absolute inset-0">
+			{#if clickedCoordinates}
+				<div
+					class="map-tooltip absolute bg-white p-2 rounded-b-md"
+					style="left: 0; right: 0; top: 0; height: 5rem; z-index: 1000;"
+				>
+					{#if !clickedInMap}
+						Please click in the Map
+					{:else}
+						{tooltip.properties.total} Minuten
+					{/if}
+
+					<div class="close-modal" on:click={closeModal}>X</div>
+				</div>
+			{/if}
+		</div>
 	</div>
 </div>
 
@@ -175,5 +192,32 @@
 	#map {
 		height: 600px;
 		width: 100%;
+	}
+
+	.map-tooltip {
+		pointer-events: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 2rem;
+		background: rgb(255, 255, 255);
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 1) 0%,
+			rgba(255, 255, 255, 0.7637255585828081) 95%,
+			rgba(255, 255, 255, 0) 100%
+		);
+	}
+
+	.close-modal {
+		position: absolute;
+		right: 0;
+		top: 0;
+		cursor: pointer;
+		font-size: 20px;
+		line-height: 20px;
+		padding: 5px 5px;
+		background-color: hsla(0, 0%, 0%, 0.2);
+		border-radius: 0 0 0 5px;
 	}
 </style>
