@@ -5,16 +5,16 @@ export const description = 'some description in the config';
 export const url = dev ? 'http://localhost:5173' : 'https://joyofcode.xyz';
 export const landing_page_folders = [
 	{
-		name: 'Maps and other Things',
+		name: 'Blog',
 		slug: 'posts'
+	},
+	{
+		name: 'Maps',
+		slug: 'maps'
 	},
 	{
 		name: 'Photos',
 		slug: 'photos'
-	},
-	{
-		name: 'Github',
-		slug: 'github'
 	},
 	{
 		name: 'Receipts',

@@ -24,7 +24,7 @@
 
 <h2 class="text-[2rem]">{title}</h2>
 
-<div class="landing-container grid place-items-center">
+<div class="landing-container grid place-items-center" style="max-height: 100%;">
 	{#if palette}
 		{#each items as item, i}
 			{@const href = `${route_folder.length === 1 ? route_folder[0] : route_folder[i]}`}
@@ -49,7 +49,7 @@
 <style lang="scss">
 	h2 {
 		color: var(--brand);
-		margin-block: 2rem;
+		padding-block: 2rem;
 		text-align: center;
 		margin-inline: auto;
 	}

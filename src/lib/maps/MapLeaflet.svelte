@@ -145,9 +145,7 @@
 
 	// shitty solution
 	function closeModal() {
-		setTimeout(() => {
-			clickedCoordinates = undefined;
-		}, 100);
+		clickedCoordinates = undefined;
 	}
 </script>
 
@@ -181,7 +179,7 @@
 						{tooltip.properties.total} Minuten
 					{/if}
 
-					<div class="close-modal" on:click={closeModal}>X</div>
+					<div class="close-modal" on:click|stopPropagation={closeModal}>X</div>
 				</div>
 			{/if}
 		</div>

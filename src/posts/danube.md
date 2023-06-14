@@ -41,7 +41,7 @@ This probably does not make any sense, but here you go!
 </div>
 
 <div style="text-align: center">
-  Very important thread here!
+  And one last map of Vienna
 </div>
 <img src="/images/posts/danube/rainbow_vienna.png"   loading="lazy">
 

@@ -70,28 +70,8 @@
 					strokeWidth: 3
 				});
 			}
-		});
+		}).on('click', handleFeatureClick);
 		currentLayer.addTo(map);
-	}
-
-	function createTooltip(f, layer) {
-		layer.on('click', (e) => {
-			handleFeatureClick(f, e);
-		});
-
-		layer.on('mouseover', function () {
-			this.setStyle({
-				fillColor: 'black'
-			});
-		});
-
-		layer.on('mouseout', function () {
-			let acc = `f.${data_options.dataAccessor}`;
-			let color = scale(eval(acc));
-			this.setStyle({
-				fillColor: color
-			});
-		});
 	}
 
 	let clickedCoordinates;
@@ -107,13 +87,45 @@
 	}
 
 	let tooltip;
-	function handleFeatureClick() {}
+	function handleFeatureClick(f) {
+		console.log('f: ', f.layer);
+	}
+
+	function useOwnLocation() {
+		map
+			.locate({ setView: true, watch: true }) /* This will return map so you can do chaining */
+			.on('locationfound', function (e) {
+				var marker = L.marker([e.latitude, e.longitude]).bindPopup('Your are here :)');
+				var circle = L.circle([e.latitude, e.longitude], e.accuracy / 2, {
+					weight: 1,
+					color: 'blue',
+					fillColor: '#cacaca',
+					fillOpacity: 0.2
+				});
+				map.addLayer(marker);
+				map.addLayer(circle);
+			})
+			.on('locationerror', function (e) {
+				console.log(e);
+				alert('Location access denied.');
+			});
+	}
+
+	function backToVienna() {
+		// fit map to bounds of vienna, austria
+		map.stopLocate();
+		map.fitBounds(inital_extent, { padding: [20, 20] });
+	}
 </script>
 
 <svelte:head>
 	<script src="https://unpkg.com/@mapbox/leaflet-pip@latest/leaflet-pip.js"></script>
 </svelte:head>
 
+<div class="flex justify-center">
+	<button class="p-4 bg-slate-400 m-2" on:click={useOwnLocation}>Use own location!</button>
+	<button class="p-4 bg-slate-400 m-2" on:click={backToVienna}>Jump back to Vienna</button>
+</div>
 <div class="container">
 	<div id="map" />
 </div>

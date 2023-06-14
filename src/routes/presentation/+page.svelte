@@ -27,7 +27,6 @@
 
 	let container;
 	let currentSlide = 0;
-	$: console.log('currentSlide', currentSlide);
 	let slides_fetched = false;
 	let slides_promise = get_slides().then((s) => {
 		slides_fetched = true;
@@ -36,7 +35,6 @@
 
 	$: if (container && browser && slides_fetched) {
 		document.getElementById(`slide-${currentSlide}`).scrollIntoView({ behavior: 'smooth' });
-		// console.log(document.getElementById(`slide-${currentSlide}`));
 	}
 </script>
 

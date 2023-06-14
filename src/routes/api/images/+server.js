@@ -9,6 +9,5 @@ async function getImages() {
 export async function GET() {
 	const images = await getImages();
 	let jso = JSON.stringify(images);
-	console.log('json', jso);
 	return json(images);
 }
