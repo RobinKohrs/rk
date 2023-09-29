@@ -7,17 +7,23 @@
 html,
 body {
 	height: 100%;
-	--text-color: #222;
 	box-sizing: border-box;
+	--color-bg: #cfcfcf;
+	--color-text: #d7372b;
+	background-color: var(--color-bg);
+	color: var(--color-text);
+}
+
+.banner {
+	width: 100vw;
+}
+
+@media screen and (min-widt: 650px){
+	.banner{
+		padding: 0 2rem;
+	}
 }
 
 
-html {
-	color: var(--text-color);
-	background-attachment: fixed;
-}
 
-img {
-	border-radius: 1rem;
-}
 

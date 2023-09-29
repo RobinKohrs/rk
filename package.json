@@ -27,6 +27,8 @@
 	"dependencies": {
 		"@fontsource/jetbrains-mono": "^4.5.12",
 		"@fontsource/manrope": "^4.5.13",
+		"@fontsource/rubik": "^5.0.12",
+		"@fontsource/vollkorn": "^5.0.12",
 		"@mapbox/leaflet-pip": "^1.1.0",
 		"d3": "^7.8.4",
 		"glob-fs": "^0.1.7",
@@ -35,6 +37,7 @@
 		"npm-check-updates": "^16.10.12",
 		"rehype-slug": "^5.1.0",
 		"remark-toc": "^8.0.1",
-		"remark-unwrap-images": "^3.0.1"
+		"remark-unwrap-images": "^3.0.1",
+		"svelte-toc": "^0.5.6"
 	}
 }

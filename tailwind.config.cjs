@@ -3,8 +3,9 @@ module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		screens: {
-			dt: '640px'
-			// => @media (min-width: 640px) { ... }
+			// => @media (min-width: 650px) { ... }
+			dt: '650px',
+			wd: '900px'
 		}
 	},
 	plugins: []

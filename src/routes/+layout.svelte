@@ -1,19 +1,13 @@
 <script>
 	import '../app.css';
-	import 'open-props/style';
-	// import 'open-props/normalize';
-	import 'open-props/buttons';
+	import '@fontsource/vollkorn';
+	import '@fontsource/rubik';
 </script>
 
-<div class="app-container">
-	<slot />
-</div>
+<slot />
 
 <style lang="scss">
-	.app-container {
-		min-height: 100%;
-		position: relative;
-		max-width: min(100%, 900px);
-		margin-inline: auto;
+	:global(body) {
+		font-family: 'vollkorn', sans-serif;
 	}
 </style>
