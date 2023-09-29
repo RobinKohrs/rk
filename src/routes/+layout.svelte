@@ -11,7 +11,6 @@
 
 <style lang="scss">
 	.app-container {
-		height: 100%;
 		min-height: 100%;
 		position: relative;
 		max-width: min(100%, 900px);

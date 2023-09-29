@@ -126,7 +126,7 @@
 	<button class="p-4 bg-slate-400 m-2" on:click={useOwnLocation}>Use own location!</button>
 	<button class="p-4 bg-slate-400 m-2" on:click={backToVienna}>Jump back to Vienna</button>
 </div>
-<div class="container">
+<div class="map-container">
 	<div id="map" />
 </div>
 
@@ -134,5 +134,6 @@
 	#map {
 		height: 600px;
 		width: 100%;
+		margin: 0 auto;
 	}
 </style>

@@ -11,12 +11,6 @@
 <article class="">
 	<h2 style="color: var(--brand)">{data.meta.title}</h2>
 
-	<!-- <div class="tags flex justify-center gap-4">
-		{#each data.meta.categories as category}
-			<span class="surface-4 p-2 rounded-md">&num;{category}</span>
-		{/each}
-	</div> -->
-
 	<div class="post relative">
 		<svelte:component this={data.content} />
 	</div>

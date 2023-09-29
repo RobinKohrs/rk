@@ -2,7 +2,10 @@
 module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {}
+		screens: {
+			dt: '640px'
+			// => @media (min-width: 640px) { ... }
+		}
 	},
 	plugins: []
 };

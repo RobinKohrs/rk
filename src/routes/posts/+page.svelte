@@ -16,6 +16,8 @@
 		item_path_accessor={'slug'}
 		item_photo_path_accessor={'thumbnail'}
 		background_image_position_accessor={'bg_position'}
+		bg_color={'purple'}
+		link_bg_color={'rgba(0,0,0,.2)'}
 		route_folder={data.posts.map((p) => `posts/${p.slug}`)}
 	/>
 {/if}
