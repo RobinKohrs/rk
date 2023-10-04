@@ -1,23 +1,26 @@
 <script>
 	// test array
 	export let data;
-	const { posts } = data;
-	console.log('posts: ', posts);
+	// const { posts } = data;
+	let posts = Array.from({ length: 11 }).map((e) => {
+		return {
+			date: new Date(),
+			link: '/post/understanding_grid/',
+			title: 'TEST'
+		};
+	});
 </script>
 
 <section class="frontside-container">
-	<div class="sidebar personal-info">
-		<div class="sidebar-content">
+	<div class="info-container">
+		<div class="info-content">
 			<div>Robin Kohrs</div>
 			<div>Trying yet another website</div>
 		</div>
 	</div>
 	<div class="articles-container">
 		{#each posts as post, i}
-			<a
-				class="article aspect-square flex flex-col justify-center items-center"
-				href="/post/{post.link}"
-			>
+			<a class="article" href="/post/{post.link}">
 				<h2>
 					{post.title}
 				</h2>
@@ -35,26 +38,24 @@
 </section>
 
 <style>
+	/* the default for mobile */
+	/* info on top, articles below */
+	/* two rows, one column */
 	.frontside-container {
 		--border-width: 1px;
-		padding: 0 10px 0 0;
-		display: grid;
-		grid-template-rows: 300px 1fr;
-		height: 100%;
 	}
 
-	.sidebar {
-		--sidebar-padding: 0;
-		padding: var(--sidebar-padding);
-
-		& .sidebar-content {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			gap: 1rem;
-			padding: 3rem;
-		}
+	.info-container {
+		--info-padding: 0;
+		height: 300px;
+		padding: var(--info-padding);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		padding: 3rem;
+		overflow: scroll;
 	}
 
 	.articles-container {
@@ -62,48 +63,36 @@
 		display: grid;
 		gap: var(--border-width);
 		border: var(--border-width) solid var(--color-text);
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		grid-auto-rows: minmax(300px, 400px);
 		background-color: var(--color-text);
 
+		& .article {
+			background-color: var(--color-bg);
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
 		& .article:hover {
 			border: 2px solid var(--color-text);
 		}
 	}
 
-	@media screen and (min-width: 650px) {
+	/* small desktop */
+	@media screen and (min-width: 700px) {
+		/* make it a grid of two columns */
 		.frontside-container {
-			grid-template-rows: 1fr;
-			grid-template-columns: 300px 1fr;
+			display: grid;
+			grid-template-columns: minmax(20%, 400px) 1fr;
 		}
 
-		.sidebar-content {
+		/* make left colum sticky to the top */
+		.info-container {
 			position: sticky;
-			top: var(--sidebar-padding);
+			top: 0;
 			height: 100vh;
-			max-height: 100vh;
+			padding: 1rem;
 		}
-
-		.articles-container {
-			grid-template-columns: 1fr;
-		}
-	}
-
-	@media screen and (min-width: 750px) {
-		.frontside-container {
-			grid-template-columns: 400px 1fr;
-		}
-		.articles-container {
-			grid-template-columns: 1fr 1fr;
-		}
-	}
-
-	@media screen and (min-width: 1200px) {
-		.articles-container {
-			grid-template-columns: 1fr 1fr 1fr;
-		}
-	}
-
-	.article {
-		background-color: var(--color-bg);
 	}
 </style>
