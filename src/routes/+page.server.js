@@ -6,9 +6,8 @@ export const load = async () => {
 			const link = path.split('/').at(-2) ?? '';
 			const path_to_component = `../routes/posts/${link}/+page.svelte`;
 			const component = await import(path_to_component);
-			console.log('component: ', component);
-			const { title, date } = component;
-			return { link, title, date };
+			const { title, date, tags } = component;
+			return { link, title, date, tags };
 		})
 	);
 
