@@ -4,6 +4,7 @@
 	import '@fontsource/rubik';
 </script>
 
+<!-- no changes -->
 <slot />
 
 <style lang="scss">
