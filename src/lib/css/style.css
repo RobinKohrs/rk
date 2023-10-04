@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	line-height: 1.5;
+	height: 100%;
+	box-sizing: border-box;
+	--color-bg: #cfcfcf;
+	--color-text: #d7372b;
+	background-color: var(--color-bg);
+	color: var(--color-text);
+	font-family: 'Vollkorn', sans-serif;
+}
