@@ -1,14 +1,22 @@
 <script>
+	import { slide, fade, fly } from 'svelte/transition';
 	// test array
 	export let data;
 	// const { posts } = data;
 	let posts = Array.from({ length: 11 }).map((e) => {
 		return {
 			date: new Date(),
-			link: '/post/understanding_grid/',
+			link: 'understanding_grid',
 			title: 'TEST'
 		};
 	});
+
+	import { navigating } from '$app/stores';
+	import { onMount } from 'svelte';
+
+	let animate = !$navigating;
+	let loaded = false;
+	onMount(() => (loaded = true));
 </script>
 
 <section class="frontside-container">
@@ -20,19 +28,37 @@
 	</div>
 	<div class="articles-container">
 		{#each posts as post, i}
-			<a class="article" href="/post/{post.link}">
-				<h2>
-					{post.title}
-				</h2>
-				<span
-					>{post.date.toLocaleString('de', {
-						weekday: 'short',
-						year: 'numeric',
-						month: 'short',
-						day: 'numeric'
-					})}</span
-				>
-			</a>
+			{#if animate}
+				{#if loaded}
+					<a transition:slide={{ delay: i * 100 }} class="article" href="/post/{post.link}">
+						<h2>
+							{post.title}
+						</h2>
+						<span
+							>{post.date.toLocaleString('de', {
+								weekday: 'short',
+								year: 'numeric',
+								month: 'short',
+								day: 'numeric'
+							})}</span
+						>
+					</a>
+				{/if}
+			{:else}
+				<a transition:slide class="article" href="/post/{post.link}">
+					<h2>
+						{post.title}
+					</h2>
+					<span
+						>{post.date.toLocaleString('de', {
+							weekday: 'short',
+							year: 'numeric',
+							month: 'short',
+							day: 'numeric'
+						})}</span
+					>
+				</a>
+			{/if}
 		{/each}
 	</div>
 </section>
