@@ -1,11 +1,17 @@
 <script context="module">
 	import Post from '../Post.svelte';
+	import GridOptions from './GridOptions.svelte';
 	export let date = new Date('2023-10-06');
 	export let title = 'Grid Playground';
 </script>
 
 <script>
-	let arr = Array.from({ length: 13 });
+	let width;
+	$: mobile = width < 750;
+	let arr;
+	$: if (number_of_items) {
+		arr = Array.from({ length: number_of_items });
+	}
 
 	// show options
 	let show_options = false;
@@ -15,108 +21,97 @@
 
 	// options
 	let item_width = 50;
+	let number_of_items = 13;
 	let item_height = 50;
-	let gtc = 'repeat(auto-fit, minmax(0, 1fr))';
-	let gtr = 'repeat(auto-fit, minmax(0, 1fr))';
-	let set_height_items = false;
-	let set_width_items = false;
+	let gtc = 'repeat(auto-fit, minmax(400, 1fr))';
+	let gtr = 'repeat(10, 400px)';
+	let gar = '100px';
+	let gap = '.5rem';
+	let set_items_width;
+	let set_items_height = true;
 </script>
 
+<svelte:window bind:innerWidth={width} />
+
 <Post {date} {title}>
-	<div class="post-background fixed inset-0 bg-red-200">
-		<div
-			class="post-wrapper full-width grid fixed inset-0 m-12 border-2 border-black"
-			style="resize: both; overflow: auto; gap: .2rem;"
-			style:grid-template-columns={gtc}
-			style:grid-template-rows={gtr}
-		>
-			<button class="toggle-options fixed top-0 left-0 m-4" on:click={toggleOptions}>Options</button
+	{#if arr}
+		<div class="post-background fixed inset-0 bg-red-200">
+			<div
+				class="z-5 post-wrapper grid full-width fixed inset-0"
+				style="resize: both; overflow: auto; "
+				style:grid-template-columns={mobile ? 'auto' : '30% auto'}
+				style:grid-template-rows={mobile ? '30px 1fr' : '1fr'}
 			>
-			{#if show_options}
-				<form class="options-container fixed bg-white opacity-95 inset-0 z-10">
-					<div class="options header flex justify-around">
-						<h2>Options for the grid</h2>
-						<button on:click={toggleOptions}>X</button>
-					</div>
-					<fieldset class="options-grid-container">
-						<legend>Options for the grid container</legend>
-						<label>
-							<span>grid-template-columns</span>
-							<input type="text" placeholder={gtc} bind:value={gtc} />
-						</label>
-						<label>
-							<span>grid-template-rows</span>
-							<input type="text" placeholder={gtr} bind:value={gtr} />
-						</label>
-					</fieldset>
-					<fieldset class="options-all-childs">
-						<legend>Options for childs</legend>
-						<label>
-							<div class="flex justify-around">
-								<span> Set Height for each items in Pixel? </span>
-								<button
-									on:click={() => (set_height_items = !set_height_items)}
-									style="width: 20px; height: 20px; border-radius: 50%; display: inline-block; border: 1px solid black;"
-									style:background-color={set_height_items ? 'black' : 'transparent'}
+				<div class="header" style:position={mobile ? '' : 'sticky'} style:top={mobile ? '' : '0'}>
+					{#if mobile}
+						<button on:click={toggleOptions}>Show Options</button>
+						{#if show_options}
+							<div class="fixed inset-0 z-10 bg-white opacity-95">
+								<GridOptions
+									{mobile}
+									bind:show_options
+									bind:gtc
+									bind:gtr
+									bind:gar
+									bind:item_width
+									bind:number_of_items
+									bind:set_items_height
+									bind:set_items_width
 								/>
 							</div>
-							{#if set_height_items}
-								<input type="range" name="" id="" />
-							{/if}
-						</label>
-					</fieldset>
-				</form>
-			{/if}
-			{#each arr as gi, i}
-				<div
-					contenteditable
-					class="bg-purple-300 opacity-50 border border-black"
-					style:width={`${item_width}px`}
-					style:height={`${item_height}px`}
-				>
-					{i}
+						{/if}
+					{:else}
+						<GridOptions
+							{mobile}
+							bind:show_options
+							bind:gtc
+							bind:gtr
+							bind:gar
+							bind:item_width
+							bind:number_of_items
+							bind:set_items_height
+							bind:set_items_width
+						/>
+					{/if}
 				</div>
-			{/each}
+				<div class="grid-container relative" style="">
+					<!-- identical grid definition, items are not sizes by width and height! -->
+					<div
+						class="copy-grid absolute inset-0 grid"
+						style:gap
+						style:grid-template-columns={gtc}
+						style:grid-template-rows={gtr}
+						style:grid-auto-rows={gar}
+					>
+						{#each arr as gi, i}
+							<div class="bg-purple-100 opacity-50 border border-black" />
+						{/each}
+					</div>
+
+					<!-- same as above, but if setting width and height on items behaves differently -->
+					<div
+						class="real-grid grid absolute inset-0"
+						style:gap
+						style:grid-template-columns={gtc}
+						style:grid-template-rows={gtr}
+						style:grid-auto-rows={gar}
+					>
+						{#each arr as gi, i}
+							<div
+								contenteditable
+								class="bg-purple-300 opacity-50 border border-black grid place-items-center"
+								style:width={set_items_width ? `${item_width}px` : 'auto'}
+								style:height={set_items_height ? `${item_height}px` : 'auto'}
+							>
+								<span class="font-bold text-lg text-black">{i}</span>
+							</div>
+						{/each}
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
+	{/if}
 </Post>
 
 <style>
-	label,
-	input {
-		display: block;
-		width: 100%;
-		text-align: center;
-	}
-
-	input {
-		padding: 0.5rem 1rem;
-	}
-	label > span {
-		font-size: 1.2rem;
-		font-weight: 500;
-		background-color: rgba(50, 50, 50, 0.1);
-		display: inline-block;
-		padding: 0.1rem 0.2rem;
-		border-radius: 0.1rem;
-	}
-
-	form {
-		& h2 {
-			font-size: 1.5rem;
-			text-decoration: underline;
-		}
-		& fieldset {
-			& > * {
-				margin: 0.4rem 0;
-			}
-			& legend {
-				font-weight: 900;
-				font-size: 1.3rem;
-				letter-spacing: 0.2rem;
-			}
-			border: 2px solid #acacac;
-			margin: 1rem 0;
-		}
-	}
 </style>
