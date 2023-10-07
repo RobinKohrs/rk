@@ -2,14 +2,14 @@
 	import { slide, fade, fly } from 'svelte/transition';
 	// test array
 	export let data;
-	// const { posts } = data;
-	let posts = Array.from({ length: 11 }).map((e) => {
-		return {
-			date: new Date(),
-			link: 'understanding_grid',
-			title: 'TEST'
-		};
-	});
+	const { posts } = data;
+	// let posts = Array.from({ length: 11 }).map((e) => {
+	// 	return {
+	// 		date: new Date(),
+	// 		link: 'understanding_grid',
+	// 		title: 'TEST'
+	// 	};
+	// });
 
 	import { navigating } from '$app/stores';
 	import { onMount } from 'svelte';
@@ -69,6 +69,7 @@
 	/* two rows, one column */
 	.frontside-container {
 		--border-width: 1px;
+		letter-spacing: 0.1rem;
 	}
 
 	.info-container {
@@ -89,8 +90,8 @@
 		display: grid;
 		gap: var(--border-width);
 		border: var(--border-width) solid var(--color-text);
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		grid-auto-rows: minmax(300px, 400px);
+		grid-template-columns: repeat(auto-fit, minmax(150px, 300px));
+		grid-auto-rows: minmax(100px, 250px);
 		background-color: var(--color-text);
 
 		& .article {
@@ -99,10 +100,15 @@
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
+			transition: all 400ms;
 		}
 		& .article:hover {
 			border: 2px solid var(--color-text);
 		}
+	}
+
+	.articles-container:hover .article:not(:hover) {
+		filter: blur(0.5px) brightness(0.95);
 	}
 
 	/* small desktop */
