@@ -6,6 +6,7 @@
 </script>
 
 <script>
+	import { onMount } from 'svelte';
 	let width;
 	$: mobile = width < 750;
 	let arr;
@@ -19,16 +20,38 @@
 		show_options = !show_options;
 	}
 
+	let ro;
+	let gc;
+	onMount(() => {
+		gc = document.querySelector('.grid-container.relative');
+		ro = new ResizeObserver((entries) => {
+			for (let entry of entries) {
+				let cont = entry.target;
+				let fe = cont.querySelector('.copy-grid > div:nth-child(1)');
+				single_item_height = fe.clientHeight;
+			}
+		});
+	});
+
+	$: if (gc) {
+		ro.observe(gc);
+	}
+
 	// options
-	let item_width = 50;
 	let number_of_items = 13;
-	let item_height = 50;
-	let gtc = 'repeat(auto-fit, minmax(400, 1fr))';
-	let gtr = 'repeat(10, 400px)';
-	let gar = '100px';
-	let gap = '.5rem';
+	let item_height = '';
+	let item_width = '';
+	let gtc = 'repeat(auto-fit, minmax(100px, 1fr))';
+	let gtr = '';
+	let gar = '';
+	let gap = '';
+	let ac = '';
+	let ai = '';
 	let set_items_width;
-	let set_items_height = true;
+	let set_items_height;
+
+	// single item from the grid with no settings on the items themselfes
+	let single_item_height;
 </script>
 
 <svelte:window bind:innerWidth={width} />
@@ -38,11 +61,10 @@
 		<div class="post-background fixed inset-0 bg-red-200">
 			<div
 				class="z-5 post-wrapper grid full-width fixed inset-0"
-				style="resize: both; overflow: auto; "
 				style:grid-template-columns={mobile ? 'auto' : '30% auto'}
 				style:grid-template-rows={mobile ? '30px 1fr' : '1fr'}
 			>
-				<div class="header" style:position={mobile ? '' : 'sticky'} style:top={mobile ? '' : '0'}>
+				<div class="header" style:position={mobile ? '' : ''} style:top={mobile ? '' : '0'}>
 					{#if mobile}
 						<button on:click={toggleOptions}>Show Options</button>
 						{#if show_options}
@@ -53,6 +75,7 @@
 									bind:gtc
 									bind:gtr
 									bind:gar
+									bind:gap
 									bind:item_width
 									bind:number_of_items
 									bind:set_items_height
@@ -67,14 +90,19 @@
 							bind:gtc
 							bind:gtr
 							bind:gar
-							bind:item_width
+							bind:gap
 							bind:number_of_items
+							bind:ac
+							bind:ai
 							bind:set_items_height
 							bind:set_items_width
+							bind:item_height
+							bind:item_width
+							bind:single_item_height
 						/>
 					{/if}
 				</div>
-				<div class="grid-container relative" style="">
+				<div class="grid-container relative" style="resize: both; overflow: auto; ">
 					<!-- identical grid definition, items are not sizes by width and height! -->
 					<div
 						class="copy-grid absolute inset-0 grid"
@@ -82,9 +110,16 @@
 						style:grid-template-columns={gtc}
 						style:grid-template-rows={gtr}
 						style:grid-auto-rows={gar}
+						style:align-content={ac}
+						style:align-items={ai}
 					>
 						{#each arr as gi, i}
-							<div class="bg-purple-100 opacity-50 border border-black" />
+							<div
+								contenteditable
+								class="bg-purple-100 opacity-50 border border-black grid place-items-center"
+							>
+								<span class="font-bold text-lg text-black">{i + 1}</span>
+							</div>
 						{/each}
 					</div>
 
@@ -99,11 +134,11 @@
 						{#each arr as gi, i}
 							<div
 								contenteditable
-								class="bg-purple-300 opacity-50 border border-black grid place-items-center"
-								style:width={set_items_width ? `${item_width}px` : 'auto'}
-								style:height={set_items_height ? `${item_height}px` : 'auto'}
+								class="bg-purple-400 opacity-50 border border-black grid place-items-center"
+								style:width={set_items_width ? `${item_width}` : 'auto'}
+								style:height={set_items_height ? `${item_height}` : 'auto'}
 							>
-								<span class="font-bold text-lg text-black">{i}</span>
+								<span class="font-bold text-lg text-black">{i + 1}</span>
 							</div>
 						{/each}
 					</div>
@@ -114,4 +149,12 @@
 </Post>
 
 <style>
+	.copy-grid,
+	.real-grid {
+		transition: 500ms;
+	}
+
+	.grid > div {
+		transition: 500ms;
+	}
 </style>
