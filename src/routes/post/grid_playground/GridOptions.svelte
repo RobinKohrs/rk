@@ -44,7 +44,7 @@
 				<span>Number of items</span>
 				<span
 					class="open-indicator"
-					style:transform={show_item_count ? 'rotate(90deg)' : 'rotate(270deg)'}>&gt;</span
+					style:transform={!show_item_count ? 'rotate(90deg)' : 'rotate(270deg)'}>&gt;</span
 				>
 			</legend>
 			{#if show_item_count}
@@ -67,7 +67,7 @@
 				><span>Grid container</span>
 				<span
 					class="open-indicator"
-					style:transform={show_grid_container_options ? 'rotate(90deg)' : 'rotate(270deg)'}
+					style:transform={!show_grid_container_options ? 'rotate(90deg)' : 'rotate(270deg)'}
 					>&gt;</span
 				></legend
 			>
@@ -105,14 +105,14 @@
 				<span>Options for childs</span>
 				<span
 					class="open-indicator"
-					style:transform={show_items_options ? 'rotate(90deg)' : 'rotate(270deg)'}>&gt;</span
+					style:transform={!show_items_options ? 'rotate(90deg)' : 'rotate(270deg)'}>&gt;</span
 				>
 			</legend>
 			{#if show_items_options}
 				<div class="fieldset-content" transition:slide>
 					<label>
 						<div class="flex justify-around">
-							<span> Set Height for each items in Pixel? </span>
+							<span> Set Height for each item? </span>
 							<button
 								on:click={() => (set_items_height = !set_items_height)}
 								style="width: 20px; height: 20px; border-radius: 50%; display: inline-block; border: 1px solid black;"
@@ -120,12 +120,17 @@
 							/>
 						</div>
 						{#if set_items_height}
-							<input transition:slide type="text" placeholder="50px" bind:value={item_height} />
+							<input
+								transition:slide
+								type="text"
+								placeholder="50px (or any other css unit)"
+								bind:value={item_height}
+							/>
 						{/if}
 					</label>
 					<label>
 						<div class="flex justify-around">
-							<span> Set Width for each items in Pixel? </span>
+							<span> Set Width for each item ? </span>
 							<button
 								on:click={() => (set_items_width = !set_items_width)}
 								style="width: 20px; height: 20px; border-radius: 50%; display: inline-block; border: 1px solid black;"
@@ -133,7 +138,12 @@
 							/>
 						</div>
 						{#if set_items_width}
-							<input transition:slide type="text" placeholder="50px" bind:value={item_width} />
+							<input
+								transition:slide
+								type="text"
+								placeholder="50px (or any other css unit)"
+								bind:value={item_width}
+							/>
 						{/if}
 					</label>
 				</div>

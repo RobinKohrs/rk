@@ -1,6 +1,10 @@
 <script>
 	export let title;
 	export let date;
+	export let tags;
+	import SizeDetector from '$lib/components/SizeDetector.svelte';
+
+	let page_width;
 </script>
 
 <svelte:head>
@@ -8,24 +12,8 @@
 </svelte:head>
 
 <div class="wrapper">
-	<div
-		class="full-width article-info text-center py-4 my-4"
-		style:border-bottom={'1px solid var(--color-text)'}
-	>
-		<p class="text-3xl">{title}</p>
-		<span class="date"
-			>{date.toLocaleDateString('de-DE', {
-				weekday: 'short',
-				year: 'numeric',
-				month: 'short',
-				day: 'numeric'
-			})}</span
-		>
-	</div>
-	<slot />
-	<p class="full-width text-center py-4 my-4" style:border-top={'1px solid var(--color-text)'}>
-		<a href="/">All Articles</a>
-	</p>
+	<!-- render the post -->
+	<slot {page_width} />
 </div>
 
 <style>
@@ -33,7 +21,7 @@
 		display: grid;
 		grid-template-columns:
 			[full-start] 1fr [wrapper-start]
-			minmax(0, 30rem) [wrapper-end] 1fr [full-end];
+			minmax(0, 40rem) [wrapper-end] 1fr [full-end];
 
 		/* Optional gap */
 		column-gap: var(--pad, 1rem);
@@ -45,5 +33,20 @@
 
 	.wrapper :global(> .full-width) {
 		grid-column: full;
+	}
+
+	.wrapper :global(h2) {
+		font-size: 1.5rem;
+		letter-spacing: 0.1rem;
+		text-align: center;
+		margin: 1rem 0;
+		text-decoration: underline;
+	}
+	.wrapper :global(h3) {
+		font-size: 1.4rem;
+		letter-spacing: 0.1rem;
+		text-align: center;
+		margin: 1rem 0;
+		text-decoration: underline;
 	}
 </style>

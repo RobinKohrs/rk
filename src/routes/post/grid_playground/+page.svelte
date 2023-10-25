@@ -3,6 +3,7 @@
 	import GridOptions from './GridOptions.svelte';
 	export let date = new Date('2023-10-06');
 	export let title = 'Grid Playground';
+	export let tags = ['css'];
 </script>
 
 <script>
@@ -18,23 +19,6 @@
 	let show_options = false;
 	function toggleOptions() {
 		show_options = !show_options;
-	}
-
-	let ro;
-	let gc;
-	onMount(() => {
-		gc = document.querySelector('.grid-container.relative');
-		ro = new ResizeObserver((entries) => {
-			for (let entry of entries) {
-				let cont = entry.target;
-				let fe = cont.querySelector('.copy-grid > div:nth-child(1)');
-				single_item_height = fe.clientHeight;
-			}
-		});
-	});
-
-	$: if (gc) {
-		ro.observe(gc);
 	}
 
 	// options
@@ -56,17 +40,19 @@
 
 <svelte:window bind:innerWidth={width} />
 
-<Post {date} {title}>
+<Post {date} {title} {tags}>
 	{#if arr}
 		<div class="post-background fixed inset-0 bg-red-200">
 			<div
 				class="z-5 post-wrapper grid full-width fixed inset-0"
 				style:grid-template-columns={mobile ? 'auto' : '30% auto'}
-				style:grid-template-rows={mobile ? '30px 1fr' : '1fr'}
+				style:grid-template-rows={mobile ? 'auto 1fr' : '1fr'}
 			>
 				<div class="header" style:position={mobile ? '' : ''} style:top={mobile ? '' : '0'}>
 					{#if mobile}
-						<button on:click={toggleOptions}>Show Options</button>
+						<div class="mobile-header flex justify-center my-4">
+							<button on:click={toggleOptions}>Options</button>
+						</div>
 						{#if show_options}
 							<div class="fixed inset-0 z-10 bg-white opacity-95">
 								<GridOptions
