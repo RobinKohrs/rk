@@ -100,10 +100,7 @@
 						style:align-items={ai}
 					>
 						{#each arr as gi, i}
-							<div
-								contenteditable
-								class="bg-purple-100 opacity-50 border border-black grid place-items-center"
-							>
+							<div class="bg-purple-100 opacity-50 border border-black grid place-items-center">
 								<span class="font-bold text-lg text-black">{i + 1}</span>
 							</div>
 						{/each}
@@ -116,6 +113,8 @@
 						style:grid-template-columns={gtc}
 						style:grid-template-rows={gtr}
 						style:grid-auto-rows={gar}
+						style:align-content={ac}
+						style:align-items={ai}
 					>
 						{#each arr as gi, i}
 							<div
