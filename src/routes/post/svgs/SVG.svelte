@@ -17,7 +17,6 @@
 	viewBox="{viewbox_x} {viewbox_y} {viewbox_width} {viewbox_height}"
 	version="1.2"
 >
-	<text x="2%" y="4%">SVG-Container</text>
 	<g
 		stroke-linejoin="bevel"
 		fill="none"

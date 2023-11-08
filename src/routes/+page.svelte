@@ -44,12 +44,12 @@
 		<div class="info-content text-center">
 			<div>Robin Kohrs</div>
 			<div>Trying yet another website</div>
-			<Search
+			<!-- <Search
 				{searchable}
 				bind:suggestions
 				options={{ keys: ['search'] }}
 				on:choose={({ detail }) => route(detail.item.link)}
-			/>
+			/> -->
 		</div>
 	</div>
 	<div class="articles-container">
@@ -57,7 +57,7 @@
 			{#if animate}
 				{#if loaded}
 					<a transition:slide={{ delay: i * 100 }} class="article" href="/post/{post.link}">
-						<h2>
+						<h2 class="article-title text-center" style="width: 70%; ">
 							{post.title}
 						</h2>
 						<span
@@ -68,7 +68,7 @@
 								day: 'numeric'
 							})}</span
 						>
-						<div class="tags-container flex gap-2 flex-wrap mx-4">
+						<div class="tags-container flex gap-2 mx-4 w-[90%] overflow-scroll py-2">
 							{#each post.tags as tag}
 								<span class="text-sm inline-block py-1 px-3 border border-gray-500 rounded-sm"
 									>{tag}</span
@@ -77,6 +77,7 @@
 						</div>
 					</a>
 				{/if}
+				<!-- YOU HAVE TO COPY IT -->
 			{:else}
 				<a transition:slide={{ delay: i * 100 }} class="article" href="/post/{post.link}">
 					<h2>
@@ -90,7 +91,7 @@
 							day: 'numeric'
 						})}</span
 					>
-					<div class="tags-container flex gap-2 flex-wrap mx-4">
+					<div class="tags-container flex gap-2 mx-4 w-[90%] overflow-scroll">
 						{#each post.tags as tag}
 							<span class="text-sm inline-block py-1 px-3 border border-gray-500 rounded-sm"
 								>{tag}</span
@@ -131,7 +132,7 @@
 		gap: var(--border-width);
 		border: var(--border-width) solid var(--color-text);
 		/* grid-template-columns: repeat(auto-fit, minmax(150px, 300px)); */
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		grid-auto-rows: minmax(100px, 250px);
 		background-color: var(--color-text);
 
@@ -144,10 +145,11 @@
 		& .article {
 			background-color: var(--color-bg);
 			display: flex;
-			padding-top: 3rem;
+			padding: 2rem 0;
 			flex-direction: column;
 			gap: 1rem;
 			align-items: center;
+			justify-content: space-between;
 			transition: all 200ms;
 		}
 		& .article:hover {
