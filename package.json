@@ -26,7 +26,10 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@maptiler/geocoding-control": "^1.0.0",
+		"@maptiler/sdk": "^1.2.0",
 		"fuse.js": "^6.6.2",
+		"leaflet-control-geocoder": "^1.8.3",
 		"leaflet-tilelayer-mbtiles-ts": "^1.6.0",
 		"maplibre-gl": "^3.5.2"
 	}

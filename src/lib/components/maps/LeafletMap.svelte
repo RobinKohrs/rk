@@ -25,6 +25,8 @@
 				})
 				.setView(set_view, zoom);
 			leaflet.tileLayer(tile_layer.layer, tile_layer_options).addTo(map);
+
+			L.Control.geocoder().addTo(map);
 			dispatch('mapLoaded', map);
 		}
 	});
@@ -36,6 +38,14 @@
 		}
 	});
 </script>
+
+<svelte:head>
+	<link
+		rel="stylesheet"
+		href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
+	/>
+	<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+</svelte:head>
 
 <div id="map" bind:this={mapElement} />
 
