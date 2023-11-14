@@ -18,13 +18,11 @@
 
 	onMount(async () => {
 		if (browser) {
-			const leaflet = await import('leaflet');
-			map = leaflet
-				.map(mapElement, {
-					preferCanvas: true
-				})
-				.setView(set_view, zoom);
-			leaflet.tileLayer(tile_layer.layer, tile_layer_options).addTo(map);
+			const L = await import('leaflet');
+			map = L.map(mapElement, {
+				preferCanvas: true
+			}).setView(set_view, zoom);
+			L.tileLayer(tile_layer.layer, tile_layer_options).addTo(map);
 
 			L.Control.geocoder().addTo(map);
 			dispatch('mapLoaded', map);
