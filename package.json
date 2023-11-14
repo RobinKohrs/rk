@@ -13,9 +13,11 @@
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
 		"autoprefixer": "^10.4.16",
+		"d3": "^7.8.5",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.30.0",
+		"leaflet": "^1.9.4",
 		"postcss": "^8.4.31",
 		"prettier": "^3.0.3",
 		"svelte": "^4.0.5",
@@ -25,6 +27,7 @@
 	"type": "module",
 	"dependencies": {
 		"fuse.js": "^6.6.2",
+		"leaflet-tilelayer-mbtiles-ts": "^1.6.0",
 		"maplibre-gl": "^3.5.2"
 	}
 }
