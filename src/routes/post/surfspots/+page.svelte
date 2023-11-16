@@ -8,11 +8,14 @@
 <script>
 	import { csv } from 'd3-fetch';
 	import LeafletMap from '$lib/components/maps/LeafletMap.svelte';
+	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
 
 	// load surf spots
 	let surf_spots;
-	csv('/data/surf_spots.csv').then((d) => {
-		surf_spots = d;
+	onMount(() => {
+		csv('/data/surf_spots.csv').then((d) => {
+			surf_spots = d;
+		});
 	});
 
 	let map;
@@ -23,9 +26,6 @@
 	$: if (surf_spots && map) {
 		surf_spots.forEach((s, i) => {
 			let cm = L.circleMarker([s.y, s.x], { radius: 12, color: 'red' });
-			if (i === 0) {
-				console.log('s: ', s);
-			}
 			let popup_text = `<div style="font-size: 2rem; font-weight: bold;">${s.name}</span>`;
 			cm.bindTooltip(popup_text);
 			cm.addTo(map);

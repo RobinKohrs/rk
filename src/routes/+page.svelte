@@ -41,9 +41,14 @@
 
 <section class="frontside-container">
 	<div class="info-container">
-		<div class="info-content text-center">
-			<div>Robin Kohrs</div>
-			<div>Trying yet another website</div>
+		<div class="info-content">
+			<div class="text-center underline my-5">Robin Kohrs</div>
+			<ul class="services-container px-4 flex flex-col">
+				<li><a href="">Articles</a></li>
+				<li><a href="">Maps</a></li>
+				<li><a href="">Vizualisations</a></li>
+				<li><a href="">Contact</a></li>
+			</ul>
 			<!-- <Search
 				{searchable}
 				bind:suggestions
@@ -114,15 +119,8 @@
 	}
 
 	.info-container {
-		--info-padding: 0;
 		height: 300px;
-		padding: var(--info-padding);
-		/* display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		gap: 1rem; */
-		padding: 3rem;
+		padding: 1rem;
 		overflow: scroll;
 	}
 
@@ -192,5 +190,8 @@
 		.articles-container {
 			grid-template-columns: repeat(4, 1fr);
 		}
+	}
+	.services-container {
+		font-size: clamp(16px, calc(1vw + 1rem), 20px);
 	}
 </style>

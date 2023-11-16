@@ -1,6 +1,7 @@
 <script>
 	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
 	import { browser } from '$app/environment';
+	import Geocoder from './Geocoder.svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -24,7 +25,6 @@
 			}).setView(set_view, zoom);
 			L.tileLayer(tile_layer.layer, tile_layer_options).addTo(map);
 
-			L.Control.geocoder().addTo(map);
 			dispatch('mapLoaded', map);
 		}
 	});
@@ -45,7 +45,13 @@
 	<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 </svelte:head>
 
-<div id="map" bind:this={mapElement} />
+<div class="map-container w-full h-full relative">
+	<div class="absolute bg-white top-0 right-0 z-[2000] p-4 rounded-bl-xl">
+		<Geocoder />
+	</div>
+	<div class="vignette" />
+	<div id="map" bind:this={mapElement} />
+</div>
 
 <style>
 	@import 'leaflet/dist/leaflet.css';
@@ -53,5 +59,29 @@
 	#map {
 		width: 100%;
 		height: 100%;
+	}
+
+	.vignette {
+		pointer-events: none;
+		z-index: 1000;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		box-shadow: 0 0 1000px rgba(255, 255, 255, 0.9) inset;
+	}
+
+	@media screen and (max-width: 700px) {
+		.vignette {
+			pointer-events: none;
+			z-index: 1000;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			box-shadow: 0 0 100px rgba(255, 255, 255, 0.9) inset;
+		}
 	}
 </style>
